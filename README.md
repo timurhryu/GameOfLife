@@ -2,7 +2,7 @@
 Game of Life
 ==================
 
-The Game of Life probably isn't what you think, it's a program that simulates how cells might grow or die based on a small set of rules. It was created by a British mathematician named John Conway and is sometimes called "Conway's Game of Life". John Conway was a very gifted Mathematician and universlly admired for his unvarnished opinions. He unfortunately passed away April 11th 2020 due to complication with COVID - a tremendous loss to all of us. The following description and the image above are from [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life):
+The Game of Life probably isn't what you think, it's a program that simulates how cells might grow or die based on a small set of rules. It was created by a British mathematician named John Conway and is sometimes called "Conway's Game of Life". John Conway was a very gifted Mathematician and universally admired for his unvarnished opinions. He unfortunately passed away April 11th 2020 due to complication with COVID - a tremendous loss to all of us. The following description and the image above are from [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life):
 
 >Every cell interacts with its eight neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:  
 >
