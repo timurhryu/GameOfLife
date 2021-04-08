@@ -70,10 +70,7 @@ public class Life {
     alive = !alive; //turn cell on and off with mouse press
   }
   public void draw () {    
-    if (alive != true)
-      fill(0);
-    else 
-      fill( 150 );
+    fill(alive ? 200 : 100);
     rect(x, y, width, height);
   }
   public boolean getLife() {
