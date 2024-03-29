@@ -32,7 +32,8 @@ Program Requirements
 
 Installing the Guido GUI Library on your PC or Mac
 --------------------------------
-If you are running Processing on your PC or Mac, you will need to install the Guido GUI library. To install it, start *Processing* and choose *Sketch | Import Library | Add Library*. Type *Guido* in the search box, the click on *Guido by Florian Jenett* and then click *Install*.
+1. You will need an OLDER version of processing for Guido GUI to work. [Download it here for your Operating System](https://processing.org/releases). You will use this older version to write your code and run it.
+1. If you are running Processing on your PC or Mac, you will need to install the Guido GUI library. To install it, start *Processing* and choose *Sketch | Import Library | Add Library*. Type *Guido* in the search box, the click on *Guido by Florian Jenett* and then click *Install*.
 
 Suggested steps to completing this assignment:
 ----------------------------------------------
