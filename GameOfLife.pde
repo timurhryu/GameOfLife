@@ -19,10 +19,15 @@ public void draw () {
   background( 0 );
   if (running == false) //pause the program
     return;
+
+  //store current state of buttons into a buffer
   copyFromButtonsToBuffer();
 
-  //use nested loops to draw the buttons here
+  //use nested loops to 
+       //  First draw the buttons here
+       //  Then setup the new state of the buffer based on rules
 
+  //store new state of buffer into buttons
   copyFromBufferToButtons();
 }
 
