@@ -1,5 +1,6 @@
 import de.bezier.guido.*;
-//Declare and initialize constants NUM_ROWS and NUM_COLS = 20
+final int NUM_ROWS = 20;
+final int NUM_COLS = 20;
 private Life[][] buttons; //2d array of Life buttons each representing one cell
 private boolean[][] buffer; //2d array of booleans to store state of buttons array
 private boolean running = true; //used to start and stop program
@@ -7,12 +8,26 @@ private boolean running = true; //used to start and stop program
 public void setup () {
   size(400, 400);
   frameRate(6);
+  buttons = new Life[NUM_ROWS][NUM_COLS];
+  buffer = new boolean[NUM_ROWS][NUM_COLS];
   // make the manager
   Interactive.make( this );
 
   //your code to initialize buttons goes here
+  for ( int row  = 0; row < NUM_ROWS; row++) {
+    for (int col = 0; col < NUM_COLS; col++) {
+      buttons[row][col]= new Life(row, col);
+    }
+  }
+
+
 
   //your code to initialize buffer goes here
+  for ( int row  = 0; row < NUM_ROWS; row++) {
+    for (int col = 0; col < NUM_COLS; col++) {
+      buffer[row][col]= new Boolean(false);
+    }
+  }
 }
 
 public void draw () {
@@ -24,11 +39,26 @@ public void draw () {
   copyFromButtonsToBuffer();
 
   //use nested loops to 
-       //  First draw the buttons here
-       //  Then setup the new state of the buffer based on rules
-
-  //store new state of buffer into buttons
+  //  First draw the buttons here
+  for ( int row  = 0; row < NUM_ROWS; row++) {
+    for (int col = 0; col < NUM_COLS; col++) {
+      buttons[row][col].draw();
+    }
+  }
+  copyFromButtonsToBuffer();
+  for ( int row  = 0; row < NUM_ROWS; row++) {
+    for (int col = 0; col < NUM_COLS; col++) {
+      if (isValid5by5 (row, col)) {
+        if (buttons[row][col].getLife() && (countNeighbors( row, col) < 2 || countNeighbors( row, col) > 3) ) {
+          buffer[row][col] = false;
+        } else if (!buttons[row][col].getLife() && countNeighbors( row, col) == 3) {
+          buffer[row][col] = true;
+        }
+      }
+    }
+  }
   copyFromBufferToButtons();
+ 
 }
 
 public void keyPressed() {
@@ -36,53 +66,47 @@ public void keyPressed() {
 }
 
 public void copyFromBufferToButtons() {
-  //your code here
+  for (int r = 0; r <NUM_ROWS; r++) {
+    for (int c = 0; c <NUM_COLS; c++) {
+      buttons[r][c].setLife(buffer[r][c]);
+    }
+  }
 }
 
 public void copyFromButtonsToBuffer() {
-  //your code here
+  for (int r = 0; r <NUM_ROWS; r++) {
+    for (int c = 0; c <NUM_COLS; c++) {
+      buffer[r][c] = buttons[r][c].getLife();
+    }
+  }
 }
 
-public boolean isValid(int r, int c) {
-  //your code here
-  return false;
+public boolean isValid5by5(int r, int c) {
+  return (r < 5 && r >= 0 && c < 5 && c >= 0);
 }
 
 public int countNeighbors(int row, int col) {
-  int neighbors = 0;
-  //your code here
-  return neighbors;
-}
+  int x = 0;
 
-public class Life {
-  private int myRow, myCol;
-  private float x, y, width, height;
-  private boolean alive;
-
-  public Life (int row, int col) {
-    // width = 400/NUM_COLS;
-    // height = 400/NUM_ROWS;
-    myRow = row;
-    myCol = col; 
-    x = myCol*width;
-    y = myRow*height;
-    alive = Math.random() < .5; // 50/50 chance cell will be alive
-    Interactive.add( this ); // register it with the manager
+  boolean[][] grid  ={{true, false, false, true, false}, 
+    {false, false, false, false, true}, 
+    {false, true, true, false, false}, 
+    {false, false, false, false, false}, 
+    {true, false, false, true, false}};
+  if (!isValid5by5(row, col)) {
+    return -1;
   }
 
-  // called by manager
-  public void mousePressed () {
-    alive = !alive; //turn cell on and off with mouse press
+
+  for (int r = Math.max(0, row - 1); r <= Math.min(4, row + 1); r++) {
+    for (int c = Math.max(0, col - 1); c <= Math.min(4, col + 1); c++) {
+      if (c != col || r != row) {
+        if (grid[r][c]) {
+          x++;
+        }
+      }
+    }
   }
-  public void draw () {    
-    fill(alive ? 200 : 100);
-    rect(x, y, width, height);
-  }
-  public boolean getLife() {
-    //replace the code one line below with your code
-    return false;
-  }
-  public void setLife(boolean living) {
-    //your code here
-  }
+
+  return x;
 }
